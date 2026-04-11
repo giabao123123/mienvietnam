@@ -1,0 +1,1002 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>bububububuubbuububububububu</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      .arrow {
+        width: 10px;
+        height: 10px;
+        border-left: 3px solid #fff;
+        border-top: 3px solid #fff;
+        transform: rotate(45deg);
+      }
+      .arrow-1 {
+        animation: arrowUp 1.4s infinite;
+      }
+      .arrow-2 {
+        animation: arrowUp 1.4s infinite;
+        animation-delay: 0.2s;
+      }
+      #backToTop {
+        position: fixed;
+        bottom: 24px;
+        right: 24px;
+        z-index: 9999;
+        display: none;
+      }
+      #backToTop a {
+        width: 46px;
+        height: 46px;
+        background: linear-gradient(135deg, #8bc34a, #558b2f);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 2px;
+        border-radius: 8px;
+        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.35);
+        text-decoration: none;
+        transition: all 0.3s ease;
+      }
+      #backToTop a:hover {
+        transform: translateY(-4px);
+        background: linear-gradient(135deg, #9ccc65, #689f38);
+      }
+      @media (max-width: 850px) {
+        .modal-right {
+          padding: 16px;
+        }
+        .modal-content {
+          width: 95%;
+          height: 90vh;
+          max-height: 90vh;
+          display: flex;
+          flex-direction: column;
+        }
+        .modal-left {
+          height: 200px;
+          flex-shrink: 0;
+        }
+        .modal-right {
+          flex: 1;
+          overflow-y: auto;
+          padding: 20px;
+          -webkit-overflow-scrolling: touch;
+        }
+        #m-title {
+          font-size: 1.6rem !important;
+        }
+        #m-link button {
+          margin-top: 15px;
+          padding: 16px;
+        }
+      }
+      @media (max-width: 850px) {
+        #m-link {
+          position: sticky;
+          bottom: 0;
+        }
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      :root {
+        --primary: #059669;
+        --accent: #10b981;
+        --dark: #0f172a;
+        --light-bg: #f8fafc;
+        --glass: rgba(255, 255, 255, 0.8);
+        --radius: 20px;
+        --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Plus Jakarta Sans", sans-serif;
+      }
+      body {
+        background-color: var(--light-bg);
+        color: var(--dark);
+        overflow-x: hidden;
+      }
+      .hero {
+        height: 50vh;
+        background:
+          linear-gradient(rgba(15, 23, 42, 0.6), rgba(15, 23, 42, 0.4)),
+          url("https://images.unsplash.com/photo-1528127269322-539801943592?q=80&w=2000");
+        background-size: cover;
+        background-position: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        text-align: center;
+        clip-path: ellipse(150% 100% at 50% 0%);
+      }
+      .hero h1 {
+        font-size: clamp(2rem, 6vw, 4rem);
+        font-weight: 800;
+        letter-spacing: -1px;
+      }
+      .controls-container {
+        max-width: 900px;
+        margin: -50px auto 40px;
+        padding: 25px;
+        background: var(--glass);
+        backdrop-filter: blur(20px);
+        border-radius: 30px;
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
+        display: flex;
+        flex-wrap: wrap;
+        gap: 15px;
+        z-index: 100;
+        position: relative;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+      }
+      .search-box {
+        flex: 2;
+        min-width: 250px;
+        padding: 15px 25px;
+        border-radius: 15px;
+        border: 1px solid #e2e8f0;
+        outline: none;
+        font-size: 1rem;
+        transition: var(--transition);
+      }
+      .filter-btn {
+        padding: 12px 24px;
+        border-radius: 14px;
+        border: 1px solid rgba(255, 255, 255, 0.4);
+        background: white;
+        cursor: pointer;
+        font-weight: 700;
+        color: var(--dark);
+        transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+        box-shadow:
+          0 4px 6px -1px rgba(0, 0, 0, 0.1),
+          0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        position: relative;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .filter-btn a {
+        text-decoration: none;
+        color: inherit;
+        z-index: 1;
+      }
+      .filter-btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 12px 20px -5px rgba(5, 150, 105, 0.2);
+        border-color: var(--primary);
+        color: var(--primary);
+      }
+      .filter-btn.active {
+        background: linear-gradient(135deg, var(--dark) 0%, #1e293b 100%);
+        color: white !important;
+        border: none;
+        box-shadow: 0 10px 15px -3px rgba(15, 23, 42, 0.3);
+      }
+      #m-link button {
+        width: 100%;
+        margin-top: 30px;
+        padding: 20px;
+        border-radius: 18px;
+        border: none;
+        background: #0f172a;
+        color: white;
+        font-weight: 800;
+        cursor: pointer;
+        position: relative;
+        overflow: hidden;
+        transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      }
+      #m-link button:hover {
+        background: var(--primary);
+        transform: scale(1.03);
+        box-shadow: 0 15px 30px rgba(5, 150, 105, 0.3);
+        letter-spacing: 2px;
+      }
+      #m-link button::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(255, 255, 255, 0.2),
+          transparent
+        );
+        transition: 0.8s ease;
+      }
+      .card:active {
+        transform: scale(0.98);
+      }
+      #m-link button:hover::before {
+        left: 100%;
+      }
+      .filter-btn.active a {
+        color: white !important;
+      }
+      .main-content {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 0 20px 60px;
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+        gap: 30px;
+      }
+      .card {
+        background: white;
+        border-radius: var(--radius);
+        overflow: hidden;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+        transition: var(--transition);
+        cursor: pointer;
+        position: relative;
+        animation: fadeIn 0.6s ease forwards;
+      }
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      .card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 25px 50px rgba(0, 0, 0, 0.12);
+      }
+      .card-img-wrapper {
+        height: 260px;
+        overflow: hidden;
+        position: relative;
+      }
+      .card img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: 0.8s ease;
+      }
+      .card:hover img {
+        transform: scale(1.1);
+      }
+      .region-tag {
+        position: absolute;
+        top: 15px;
+        left: 15px;
+        padding: 6px 14px;
+        background: rgba(255, 255, 255, 0.9);
+        backdrop-filter: blur(5px);
+        border-radius: 10px;
+        font-size: 0.75rem;
+        font-weight: 700;
+        color: var(--dark);
+      }
+      .card-body {
+        padding: 25px;
+      }
+      .card-body h3 {
+        font-size: 1.4rem;
+        margin-bottom: 8px;
+        font-weight: 700;
+      }
+      .card-body p {
+        color: #64748b;
+        font-size: 0.95rem;
+        line-height: 1.5;
+      }
+      .modal {
+        position: fixed;
+        inset: 0;
+        background: rgba(15, 23, 42, 0.9);
+        backdrop-filter: blur(10px);
+        display: none;
+        justify-content: center;
+        align-items: center;
+        z-index: 2000;
+        opacity: 0;
+        transition: 0.4s ease;
+      }
+      .modal.active {
+        display: flex;
+        opacity: 1;
+      }
+      .modal-content {
+        background: white;
+        width: 95%;
+        max-width: 1000px;
+        max-height: 90vh;
+        border-radius: 30px;
+        overflow: hidden;
+        display: grid;
+        grid-template-columns: 1.2fr 1fr;
+        position: relative;
+        animation: slideUp 0.5s ease;
+      }
+      .modal-left img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      .modal-right {
+        padding: 40px;
+        overflow-y: auto;
+      }
+      .highlights {
+        margin-top: 25px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+      .hl-tag {
+        padding: 6px 12px;
+        background: #f1f5f9;
+        border-radius: 8px;
+        font-size: 0.85rem;
+        color: var(--primary);
+        font-weight: 600;
+      }
+      .close-btn {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        width: 40px;
+        height: 40px;
+        background: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        z-index: 10;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      }
+      @keyframes slideUp {
+        from {
+          transform: translateY(50px);
+          opacity: 0;
+        }
+        to {
+          transform: translateY(0);
+          opacity: 1;
+        }
+      }
+      @media (max-width: 850px) {
+        .modal-content {
+          grid-template-columns: 1fr;
+        }
+        .modal-left {
+          height: 250px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="backToTop">
+      <a href="#hero" aria-label="Lên đầu trang">
+        <span class="arrow arrow-1"></span>
+        <span class="arrow arrow-2"></span>
+      </a>
+    </div>
+    <section class="hero" id="hero">
+      <h1>VIỆT NAM</h1>
+      <p>Hành trình khám phá 34 tỉnh thành rạng rỡ</p>
+    </section>
+    <div class="controls-container">
+      <input
+        type="text"
+        id="searchInput"
+        class="search-box"
+        placeholder="Bạn muốn đi đâu?"
+      />
+      <button
+        class="filter-btn active"
+        data-region="all"
+        id="btn-all"
+        href="#all"
+      >
+        Tất cả
+      </button>
+      <button
+        class="filter-btn"
+        data-region="Miền Bắc"
+        id="btn-mienbac"
+        href="#mienbac"
+      >
+        Miền Bắc
+      </button>
+      <button
+        class="filter-btn"
+        data-region="Miền Trung"
+        id="btn-mientrung"
+        href="#mientrung"
+      >
+        Miền Trung
+      </button>
+      <button
+        class="filter-btn"
+        data-region="Miền Nam"
+        id="btn-miennam"
+        href="#miennam"
+      >
+        Miền Nam
+      </button>
+    </div>
+    <main class="main-content">
+      <div class="grid" id="provincesGrid"></div>
+    </main>
+    <div class="modal" id="modal">
+      <div class="modal-content">
+        <div class="close-btn" onclick="closeModal()">✕</div>
+        <div class="modal-left">
+          <img id="m-img" src="" alt="" />
+        </div>
+        <div class="modal-right">
+          <span
+            id="m-region"
+            style="
+              color: var(--primary);
+              font-weight: 800;
+              font-size: 0.8rem;
+              text-transform: uppercase;
+            "
+          ></span>
+          <h2 id="m-title" style="font-size: 2.5rem; margin: 10px 0"></h2>
+          <p id="m-desc" style="color: #475569; line-height: 1.7"></p>
+          <a
+            id="m-link"
+            href="#"
+            style="
+              color: white;
+              text-decoration: none;
+              font-weight: 700;
+              display: block;
+            "
+          >
+            <button
+              style="
+                width: 100%;
+                margin-top: 30px;
+                padding: 18px;
+                border-radius: 15px;
+                border: none;
+                background: var(--dark);
+                cursor: pointer;
+                color: white;
+              "
+            >
+              Khám phá ngay
+            </button>
+          </a>
+        </div>
+      </div>
+    </div>
+    <script>
+      const backToTop = document.getElementById("backToTop");
+      window.addEventListener("scroll", () => {
+        if (window.scrollY > 300) {
+          backToTop.style.display = "block";
+        } else {
+          backToTop.style.display = "none";
+        }
+      });
+      document
+        .getElementById("btn-miennam")
+        .addEventListener("click", function () {
+          window.location.hash = "miennam";
+          const element = document.getElementById("miennam");
+          if (element) {
+            element.scrollIntoView({ behavior: "smooth" });
+          }
+        });
+      document
+        .getElementById("btn-mientrung")
+        .addEventListener("click", function () {
+          window.location.hash = "mientrung";
+          const element = document.getElementById("mientrung");
+          if (element) {
+            element.scrollIntoView({ behavior: "smooth" });
+          }
+        });
+      document
+        .getElementById("btn-mienbac")
+        .addEventListener("click", function () {
+          window.location.hash = "mienbac";
+          const element = document.getElementById("mienbac");
+          if (element) {
+            element.scrollIntoView({ behavior: "smooth" });
+          }
+        });
+      document.getElementById("btn-all").addEventListener("click", function () {
+        window.location.hash = "all";
+        const element = document.getElementById("all");
+        if (element) {
+          element.scrollIntoView({ behavior: "smooth" });
+        }
+      });
+      const provinces = [
+        {
+          id: 1,
+          name: "TP Hồ Chí Minh",
+          region: "Miền Nam",
+          image:
+            "https://bcp.cdnchinhphu.vn/334894974524682240/2025/10/11/thhcm3-1751117768686741864233-17601358530601669289104.jpg",
+          description:
+            "TP. Hồ Chí Minh – thành phố mang tên Bác, nơi nhịp sống luôn hối hả, ánh đèn không bao giờ tắt, hội tụ khát vọng, cơ hội và những giấc mơ lớn của biết bao con người 🌆✨",
+          url: "https://giabao123123.github.io/HCM/",
+        },
+        {
+          id: 30,
+          name: "Quảng Ngãi",
+          region: "Miền Trung",
+          image:
+            "https://cdn-media.sforum.vn/storage/app/media/ctvseo_MH/%E1%BA%A2nh%20%C4%91%E1%BA%B9p%20Qu%E1%BA%A3ng%20Ng%C3%A3i/anh-dep-quang-ngai-39.jpg",
+          description:
+            "Quảng Ngãi – vùng đất miền Trung giàu truyền thống, nơi biển đảo Lý Sơn xanh ngát, núi Ấn – sông Trà in dấu lịch sử và con người mộc mạc, kiên cường trước gió sóng 🌊⛰️",
+          url: "https://giabao123123.github.io/quangngai/",
+        },
+        {
+          id: 31,
+          name: "Gia Lai",
+          region: "Miền Trung",
+          image:
+            "https://media-cdn-v2.laodong.vn/Storage/newsportal/2018/7/27/621563/28336319_18604779739-01.jpg",
+          description:
+            "Gia Lai – cao nguyên đại ngàn đầy nắng gió, nơi Biển Hồ xanh biếc, rừng núi bạt ngàn và không gian văn hóa cồng chiêng vang vọng, đậm chất Tây Nguyên hùng tráng 🌿⛰️",
+          url: "https://giabao123123.github.io/gialai/",
+        },
+        {
+          id: 14,
+          name: "Điện Biên",
+          region: "Miền Bắc",
+          image:
+            "https://cdn-media.sforum.vn/storage/app/media/thanhhuyen/%E1%BA%A3nh%20%C4%91%E1%BA%B9p%20%C4%91i%E1%BB%87n%20bi%C3%AAn%20fix/4/anh-dep-dien-bien-28.jpg",
+          description:
+            "Điện Biên – mảnh đất lịch sử hào hùng, nơi thung lũng Mường Thanh xanh ngát, núi rừng Tây Bắc trầm mặc và chiến thắng năm xưa vẫn vang vọng niềm tự hào dân tộc ⛰️🌾",
+          url: "https://giabao123123.github.io/dienbien/",
+        },
+        {
+          id: 9,
+          name: "TP. Hà Nội",
+          region: "Miền Bắc",
+          image:
+            "https://hoanghamobile.com/tin-tuc/wp-content/uploads/2024/04/anh-ha-noi.jpg",
+          description:
+            "TP. Hà Nội – trái tim của cả nước, nơi ngàn năm văn hiến lắng đọng trong từng con phố cổ, hồ Gươm tĩnh lặng và nhịp sống hiện đại hòa quyện cùng nét đẹp truyền thống rất riêng 🍃🏙️",
+          url: "https://giabao123123.github.io/hanoi/",
+        },
+        {
+          id: 2,
+          name: "Đồng Nai",
+          region: "Miền Nam",
+          image:
+            "https://cdn-media.sforum.vn/storage/app/media/ctvseo_MH/%E1%BA%A3nh%20%C4%91%E1%BA%B9p%20%C4%91%E1%BB%93ng%20nai/anh-dep-dong-nai-thumbnail.jpg",
+          description:
+            "Đồng Nai – vùng đất năng động của miền Đông Nam Bộ, nơi giao thoa giữa truyền thống và hiện đại, nhịp sống công nghiệp sôi động nhưng vẫn giữ trọn nét bình yên của thiên nhiên và con người 🌿🏙️",
+          url: "https://giabao123123.github.io/dongnai/",
+        },
+        {
+          id: 3,
+          name: "Tây Ninh",
+          region: "Miền Nam",
+          image:
+            "https://s3-ap-southeast-1.amazonaws.com/cntatr-assets-ap-southeast-1-250226768838-55a62c9399d4d8a6/2022/02/dia-diem-du-lich-tay-ninh-1.jpg?tr=q-70,c-at_max,w-1000,h-600",
+          description:
+            "Tây Ninh – vùng đất linh thiêng dưới chân núi Bà Đen, nơi thiên nhiên hùng vĩ hòa quyện cùng bản sắc văn hóa độc đáo, mang vẻ đẹp vừa bình yên vừa đầy sức sống 🌄✨",
+          url: "https://giabao123123.github.io/tayninh/",
+        },
+        {
+          id: 4,
+          name: "Cần Thơ",
+          region: "Miền Nam",
+          image:
+            "https://ik.imagekit.io/tvlk/blog/2021/11/dia-diem-du-lich-can-tho-cover.jpg",
+          description:
+            "Cần Thơ – thủ phủ miền Tây sông nước, nơi bến Ninh Kiều soi bóng, chợ nổi rộn ràng từ sớm mai và tình người luôn ngọt ngào như phù sa đôi bờ 🌊🌅",
+          url: "https://giabao123123.github.io/cantho/",
+        },
+        {
+          id: 5,
+          name: "Vĩnh Long",
+          region: "Miền Nam",
+          image:
+            "https://vcdn1-dulich.vnecdn.net/2024/01/08/MT-7951-1704708435.jpg?w=0&h=0&q=100&dpr=1&fit=crop&s=xovmUwLrfAel13tr5diYkw",
+          description:
+            "Vĩnh Long – miền đất hiền hòa giữa hai dòng Tiền – Hậu, nơi vườn trái cây trĩu quả, sông nước mênh mang và con người chân chất, mến khách đậm tình miền Tây 🌿🍊",
+          url: "https://giabao123123.github.io/VinhLong/",
+        },
+        {
+          id: 6,
+          name: "Đồng Tháp",
+          region: "Miền Nam",
+          image:
+            "https://cdn.vntrip.vn/cam-nang/wp-content/uploads/2018/02/thap-muoi-1.jpg",
+          description:
+            "Đồng Tháp – đất sen hồng thơm ngát, nơi đồng quê yên bình trải dài, sông nước hiền hòa và con người mộc mạc, nghĩa tình làm say lòng kẻ ghé thăm 🌸🌾",
+          url: "https://giabao123123.github.io/dongthap/",
+        },
+        {
+          id: 7,
+          name: "Cà Mau",
+          region: "Miền Nam",
+          image:
+            "https://cdn-media.sforum.vn/storage/app/media/ctvseo_MH/%E1%BA%A3nh%20%C4%91%E1%BA%B9p%20c%C3%A0%20mau/anh-dep-ca-mau-4.jpg",
+          description:
+            "Cà Mau – mảnh đất cuối trời Tổ quốc, nơi rừng đước bạt ngàn ôm trọn sóng gió biển khơi, mang vẻ đẹp hoang sơ, kiên cường và đậm tình người phương Nam 🌊🌿",
+          url: "https://giabao123123.github.io/camau/",
+        },
+        {
+          id: 8,
+          name: "An Giang",
+          region: "Miền Nam",
+          image:
+            "https://www.vietnambooking.com/wp-content/uploads/2020/07/khu-that-son.jpg",
+          description:
+            "An Giang – vùng đất giao hòa giữa núi non và sông nước, nơi Thất Sơn huyền bí soi bóng phù sa, văn hóa đa sắc màu và con người chân thành, hiếu khách 💚⛰️",
+          url: "https://giabao123123.github.io/angiang/",
+        },
+        {
+          id: 10,
+          name: "TP. Hải Phòng",
+          region: "Miền Bắc",
+          image:
+            "https://cdn-media.sforum.vn/storage/app/media/thanhhuyen/%E1%BA%A3nh%20%C4%91%E1%BA%B9p%20h%E1%BA%A3i%20ph%C3%B2ng/1/anh-dep-hai-phong-8.jpg",
+          description:
+            "TP. Hải Phòng – thành phố Hoa Phượng Đỏ, nơi biển trời lồng lộng, cảng biển sôi động và con người thẳng thắn, hào sảng tạo nên một vùng đất đầy bản lĩnh và sức sống 🚢🌺",
+          url: "https://giabao123123.github.io/haiphong/",
+        },
+        {
+          id: 11,
+          name: "Tuyên Quang",
+          region: "Miền Bắc",
+          image:
+            "https://bcp.cdnchinhphu.vn/Uploaded/nguyenminhdiem/2020_08_13/TP%20TuyenQuang.jpg",
+          description:
+            "Tuyên Quang – miền đất cách mạng giữa núi rừng Đông Bắc, nơi thiên nhiên hùng vĩ, lịch sử hào hùng và con người mộc mạc, nghĩa tình để lại nhiều dấu ấn khó quên 🌿⛰️",
+          url: "https://giabao123123.github.io/tuyenquang/",
+        },
+        {
+          id: 12,
+          name: "Lào Cai",
+          region: "Miền Bắc",
+          image:
+            "https://images.vietnamtourism.gov.vn/vn/images/2024/thang_11/0711.lao_cai1.jpg",
+          description:
+            "Lào Cai – vùng đất biên cương hùng vĩ, nơi Sa Pa mờ sương, ruộng bậc thang uốn lượn và bản sắc văn hóa các dân tộc hòa quyện trong vẻ đẹp vừa hoang sơ vừa thơ mộng ⛰️🌾",
+          url: "https://giabao123123.github.io/laocai/",
+        },
+        {
+          id: 13,
+          name: "Lai Châu",
+          region: "Miền Bắc",
+          image:
+            "https://dulich.laichau.gov.vn/DataFiles/dulichlaichau/sanphamdulich/thanh-pho-lai-chau-diem-den-ly-tuong/thanh-pho-2021-1.jpg",
+          description:
+            "Lai Châu – miền đất Tây Bắc hùng vĩ, nơi núi non trùng điệp, mây trời bảng lảng và bản sắc dân tộc đậm đà tạo nên vẻ đẹp nguyên sơ, bình yên mà cuốn hút ⛰️☁️",
+          url: "https://giabao123123.github.io/laichau/",
+        },
+        {
+          id: 15,
+          name: "Lạng Sơn",
+          region: "Miền Bắc",
+          image:
+            "https://bcp.cdnchinhphu.vn/zoom/600_315/334894974524682240/2024/6/12/ls-1718181109578214277132-56-0-556-800-crop-17181812557781256132280.jpg",
+          description:
+            "Lạng Sơn – vùng đất biên giới Đông Bắc, nơi núi non trập trùng, cửa khẩu sôi động và bản sắc văn hóa xứ Lạng đậm đà, mộc mạc mà cuốn hút ⛰️🌿",
+          url: "https://giabao123123.github.io/langson/",
+        },
+        {
+          id: 16,
+          name: "Cao Bằng",
+          region: "Miền Bắc",
+          image:
+            "https://images.pexels.com/photos/14776912/pexels-photo-14776912.jpeg",
+          description:
+            "Cao Bằng – miền non nước hữu tình, nơi thác Bản Giốc hùng vĩ đổ giữa đại ngàn, thiên nhiên trong lành và con người giản dị, đậm nghĩa tình vùng cao ⛰️💧",
+          url: "https://giabao123123.github.io/caobang/",
+        },
+        {
+          id: 17,
+          name: "Sơn La",
+          region: "Miền Bắc",
+          image:
+            "https://media.baosonla.org.vn/Uploads/Images2017/Th%C3%A0nh%20ph%E1%BB%91%20S%C6%A1n%20La%20copy.jpg",
+          description:
+            "Sơn La – miền cao nguyên Tây Bắc rộng lớn, nơi núi rừng trùng điệp, cao nguyên Mộc Châu xanh mát và bản sắc văn hóa dân tộc tạo nên vẻ đẹp phóng khoáng, bình yên ⛰️🌿",
+          url: "https://giabao123123.github.io/sonla/",
+        },
+        {
+          id: 18,
+          name: "Thái Nguyên",
+          region: "Miền Bắc",
+          image:
+            "https://cdn-media.sforum.vn/storage/app/media/ctvseo_MH/%E1%BA%A3nh%20%C4%91%E1%BA%B9p%20Th%C3%A1i%20Nguy%C3%AAn/anh-dep-thai-nguyen-1.jpg",
+          description:
+            "Thái Nguyên – thủ phủ chè xanh của miền Bắc, nơi đồi chè bát ngát trải dài, nhịp sống công nghiệp năng động hòa quyện cùng nét văn hóa truyền thống mộc mạc, thân thương 🍃⛰️",
+          url: "https://giabao123123.github.io/thainguyen/",
+        },
+        {
+          id: 19,
+          name: "Phú Thọ",
+          region: "Miền Bắc",
+          image:
+            "https://cdn-media.sforum.vn/storage/app/media/ctvseo_MH/%E1%BA%A3nh%20%C4%91%E1%BA%B9p%20ph%C3%BA%20th%E1%BB%8D/anh-dep-phu-tho-20.jpg",
+          description:
+            "Phú Thọ – đất Tổ linh thiêng cội nguồn dân tộc, nơi núi Nghĩa Lĩnh uy nghi, đền Hùng trầm mặc và truyền thống “uống nước nhớ nguồn” được gìn giữ qua bao thế hệ 🌿⛰️",
+          url: "https://giabao123123.github.io/phutho/",
+        },
+        {
+          id: 20,
+          name: "Quảng Ninh",
+          region: "Miền Bắc",
+          image:
+            "https://cdn-media.sforum.vn/storage/app/media/ctvseo_MH/%E1%BA%A3nh%20%C4%91%E1%BA%B9p%20Qu%E1%BA%A3ng%20Ninh/anh-dep-quang-ninh-8.jpg",
+          description:
+            "Quảng Ninh – vùng đất biển đảo hùng vĩ, nơi Vịnh Hạ Long kỳ quan thiên nhiên thế giới tỏa sáng, núi non – biển trời giao hòa và nhịp sống du lịch, công nghiệp đầy sức bật 🌊⛰️",
+          url: "https://giabao123123.github.io/quangninh/",
+        },
+        {
+          id: 21,
+          name: "Bắc Ninh",
+          region: "Miền Bắc",
+          image:
+            "https://cdn.xanhsm.com/2025/03/226f5927-du-lich-bac-ninh-1.jpg",
+          description:
+            "Bắc Ninh – miền quê quan họ ngọt ngào, nơi làn điệu dân ca mượt mà vang bên dòng sông Cầu, lưu giữ đậm đà bản sắc văn hóa Kinh Bắc xưa và nay 🎶🌿",
+          url: "https://giabao123123.github.io/bacninh/",
+        },
+        {
+          id: 22,
+          name: "Hưng Yên",
+          region: "Miền Bắc",
+          image:
+            "https://cdn-media.sforum.vn/storage/app/media/ctvseo_MH/%E1%BA%A3nh%20%C4%91%E1%BA%B9p%20h%C6%B0ng%20y%C3%AAn/anh-dep-hung-yen-5.jpg",
+          description:
+            "Hưng Yên – vùng đất nhãn lồng trứ danh, nơi phù sa sông Hồng bồi đắp, làng quê yên bình và truyền thống hiếu học, nghĩa tình được gìn giữ qua bao đời 🌿🍊",
+          url: "https://giabao123123.github.io/hungyen/",
+        },
+        {
+          id: 23,
+          name: "Ninh Bình",
+          region: "Miền Bắc",
+          image:
+            "https://cdn-media.sforum.vn/storage/app/media/ctvseo_MH/%E1%BA%A3nh%20%C4%91%E1%BA%B9p%20ninh%20b%C3%ACnh/anh-dep-ninh-binh-5.jpg",
+          description:
+            "Ninh Bình – miền non nước hữu tình, nơi Tràng An – Tam Cốc nên thơ, núi đá vôi soi bóng dòng sông xanh và vẻ đẹp cổ kính hòa quyện cùng thiên nhiên kỳ vĩ ⛰️🌿",
+          url: "https://giabao123123.github.io/ninhbinh/",
+        },
+        {
+          id: 24,
+          name: "Thanh Hóa",
+          region: "Miền Trung",
+          image:
+            "https://cdn-media.sforum.vn/storage/app/media/ctvseo_MH/%E1%BA%A3nh%20%C4%91%E1%BA%B9p%20Thanh%20H%C3%B3a/anh-dep-thanh-hoa-1.jpg",
+          description:
+            "Thanh Hóa – vùng đất địa linh nhân kiệt, nơi núi rừng, đồng bằng và biển cả giao hòa, lưu giữ bề dày lịch sử cùng nhịp sống mạnh mẽ, giàu bản sắc xứ Thanh 🌊⛰️",
+          url: "https://giabao123123.github.io/thanhhoa/",
+        },
+        {
+          id: 25,
+          name: "Nghệ An",
+          region: "Miền Trung",
+          image:
+            "https://bna.1cdn.vn/2019/08/04/uploaded-hagiangbna-2018_12_10-_bna_songlam3a_nguyenthanhhai1279125_10122018.jpg",
+          description:
+            "Nghệ An – quê hương Chủ tịch Hồ Chí Minh, vùng đất giàu truyền thống cách mạng, nơi biển Cửa Lò lộng gió, núi rừng hùng vĩ và con người cần cù, nghĩa tình đậm chất xứ Nghệ 🌊⛰️",
+          url: "https://giabao123123.github.io/nghean/",
+        },
+        {
+          id: 26,
+          name: "Hà Tĩnh",
+          region: "Miền Trung",
+          image:
+            "https://static.vinwonders.com/production/danh-thang-nui-hong-song-la-ha-tinh.jpg",
+          description:
+            "Hà Tĩnh – miền đất nắng gió miền Trung, nơi núi Hồng – sông La in dấu lịch sử, con người kiên cường, chân chất và nghĩa tình sâu đậm qua bao thế hệ 🌾⛰️",
+          url: "https://giabao123123.github.io/hatinh/",
+        },
+        {
+          id: 27,
+          name: "Quảng Trị",
+          region: "Miền Trung",
+          image:
+            "https://image.thanhnien.vn/Uploaded/phucndh/2022_12_28/0020a-hoang-hon-dong-ha-1510.jpg",
+          description:
+            "Quảng Trị – mảnh đất anh hùng của miền Trung, nơi dòng Thạch Hãn lặng lẽ chảy qua lịch sử, lưu giữ ký ức hào hùng và tinh thần kiên cường của con người đất lửa 🌊⛰️",
+          url: "https://giabao123123.github.io/quangtri/",
+        },
+        {
+          id: 28,
+          name: "TP. Huế",
+          region: "Miền Trung",
+          image:
+            "https://cdn-media.sforum.vn/storage/app/media/ctvseo_MH/%E1%BA%A3nh%20%C4%91%E1%BA%B9p%20Hu%E1%BA%BF/anh-dep-hue-14.jpg",
+          description:
+            "TP. Huế – cố đô trầm mặc bên dòng Hương Giang, nơi nhịp sống chậm rãi hòa cùng di sản cung đình, mái ngói rêu phong và vẻ đẹp dịu dàng rất riêng của miền thơ mộng 🌸🏯",
+          url: "https://giabao123123.github.io/hue/",
+        },
+        {
+          id: 29,
+          name: "TP. Đà Nẵng",
+          region: "Miền Trung",
+          image:
+            "https://ik.imagekit.io/tvlk/blog/2025/05/AzjzWJVz-canh-dep-da-nang-cover.png",
+          description:
+            "TP. Đà Nẵng – thành phố đáng sống bên bờ biển miền Trung, nơi núi – sông – biển giao hòa, nhịp sống hiện đại năng động và con người thân thiện tạo nên sức hút rất riêng 🌊🌉",
+          url: "https://giabao123123.github.io/danang/",
+        },
+        {
+          id: 32,
+          name: "Khánh Hoà",
+          region: "Miền Trung",
+          image:
+            "https://cdn-media.sforum.vn/storage/app/media/ctvseo_MH/%E1%BA%A3nh%20%C4%91%E1%BA%B9p%20kh%C3%A1nh%20h%C3%B2a/anh-dep-khanh-hoa-1.jpg",
+          description:
+            "Khánh Hòa – miền biển nắng gió hiền hòa, nơi vịnh Nha Trang xanh trong, cát trắng nắng vàng và nhịp sống du lịch sôi động hòa cùng vẻ đẹp biển trời quyến rũ 🌊☀️",
+          url: "https://giabao123123.github.io/khanhhoa/",
+        },
+        {
+          id: 33,
+          name: "Đắk Lắk",
+          region: "Miền Trung",
+          image:
+            "https://mia.vn/media/uploads/blog-du-lich/top-dia-diem-du-lich-daklak-noi-tieng-khong-the-bo-lo-phan-2-1-1652215859.jpg",
+          description:
+            "Đắk Lắk – trái tim của Tây Nguyên đại ngàn, nơi cà phê thơm nồng lan tỏa, tiếng cồng chiêng vang vọng núi rừng và con người chân chất, mạnh mẽ giữa đất trời bazan đỏ lửa 🌿☕⛰️",
+          url: "https://giabao123123.github.io/daklak/",
+        },
+        {
+          id: 34,
+          name: "Lâm Đồng",
+          region: "Miền Trung",
+          image:
+            "https://i2.ex-cdn.com/crystalbay.com/files/content/2024/06/18/du-lich-lam-dong-3-1655.jpg",
+          description:
+            "Lâm Đồng – cao nguyên lãng mạn của Tây Nguyên, nơi Đà Lạt mờ sương, rừng thông xanh ngát, khí trời dịu mát và nhịp sống chậm rãi khiến lòng người dễ say 🌲🌸",
+          url: "https://giabao123123.github.io/lamdong/",
+        },
+      ];
+      const grid = document.getElementById("provincesGrid");
+      const searchInput = document.getElementById("searchInput");
+      let currentFilter = "all";
+      function render(data) {
+        grid.innerHTML = data
+          .map(
+            (p) => `
+                <div class="card" onclick="openModal(${p.id})">
+                    <div class="card-img-wrapper">
+                        <span class="region-tag">${p.region}</span>
+                        <img src="${p.image}" alt="${p.name}">
+                    </div>
+                    <div class="card-body">
+                        <h3>${p.name}</h3>
+                        <p>${p.description.substring(0, 85)}...</p>
+                        <div style="margin-top:15px; color:var(--primary); font-weight:700; font-size:0.85rem">XEM CHI TIẾT →</div>
+                    </div>
+                </div>
+            `,
+          )
+          .join("");
+      }
+      function removeVietnameseTones(str) {
+        str = str.replace(/à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ/g, "a");
+        str = str.replace(/è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ/g, "e");
+        str = str.replace(/ì|í|ị|ỉ|ĩ/g, "i");
+        str = str.replace(/ò|ó|ọ|ỏ|õ|ô|ồ|ố|ộ|ổ|ỗ|ơ|ờ|ớ|ợ|ở|ỡ/g, "o");
+        str = str.replace(/ù|ú|ụ|ủ|ũ|ư|ừ|ứ|ự|ử|ữ/g, "u");
+        str = str.replace(/ỳ|ý|ỵ|ỷ|ỹ/g, "y");
+        str = str.replace(/đ/g, "d");
+        str = str.replace(/À|Á|Ạ|Ả|Ã|Â|Ầ|Ấ|Ậ|Ẩ|Ẫ|Ă|Ằ|Ắ|Ặ|Ẳ|Ẵ/g, "A");
+        str = str.replace(/È|É|Ẹ|Ẻ|Ẽ|Ê|Ề|Ế|Ệ|Ể|Ễ/g, "E");
+        str = str.replace(/Ì|Í|Ị|Ỉ|Ĩ/g, "I");
+        str = str.replace(/Ò|Ó|Ọ|Ỏ|Õ|Ô|Ồ|Ố|Ộ|Ổ|Ỗ|Ơ|Ờ|Ớ|Ợ|Ở|Ỡ/g, "O");
+        str = str.replace(/Ù|Ú|Ụ|Ủ|Ũ|Ư|Ừ|Ứ|Ự|Ử|Ữ/g, "U");
+        str = str.replace(/Ỳ|Ý|Ỵ|Ỷ|Ỹ/g, "Y");
+        str = str.replace(/Đ/g, "D");
+        str = str.replace(/\u0300|\u0301|\u0303|\u0309|\u0323/g, "");
+        str = str.replace(/\u02C6|\u0306|\u031B/g, "");
+        return str;
+      }
+      function handleFilter() {
+        const searchTerm = removeVietnameseTones(
+          searchInput.value.toLowerCase(),
+        );
+        const filtered = provinces.filter((p) => {
+          const provinceNameNoTone = removeVietnameseTones(
+            p.name.toLowerCase(),
+          );
+          const matchSearch = provinceNameNoTone.includes(searchTerm);
+          const matchRegion =
+            currentFilter === "all" || p.region === currentFilter;
+          return matchSearch && matchRegion;
+        });
+        if (filtered.length === 0) {
+          grid.innerHTML = `
+            <div style="grid-column: 1/-1; text-align: center; padding: 50px; color: #64748b;">
+                <p style="font-size: 1.2rem;">🔍 Không tìm thấy kết quả phù hợp với "<strong>${searchInput.value}</strong>"</p>
+            </div>`;
+        } else {
+          render(filtered);
+        }
+      }
+      searchInput.addEventListener("input", handleFilter);
+      document.querySelectorAll(".filter-btn").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          document
+            .querySelector(".filter-btn.active")
+            .classList.remove("active");
+          btn.classList.add("active");
+          currentFilter = btn.dataset.region;
+          handleFilter();
+        });
+      });
+      function openModal(id) {
+        const p = provinces.find((item) => item.id === id);
+        document.getElementById("m-title").innerText = p.name;
+        document.getElementById("m-img").src = p.image;
+        document.getElementById("m-desc").innerText = p.description;
+        document.getElementById("m-region").innerText = p.region;
+        const linkElement = document.getElementById("m-link");
+        linkElement.href = p.url || "#";
+        linkElement.target = "_blank";
+        linkElement.rel = "noopener noreferrer";
+        const m = document.getElementById("modal");
+        m.style.display = "flex";
+        setTimeout(() => m.classList.add("active"), 10);
+        document.body.style.overflow = "hidden";
+      }
+      function closeModal() {
+        const m = document.getElementById("modal");
+        m.classList.remove("active");
+        setTimeout(() => {
+          m.style.display = "none";
+          document.body.style.overflow = "auto";
+        }, 400);
+      }
+      render(provinces);
+      function checkHashAndFilter() {
+        const hash = window.location.hash;
+        if (hash === "#mienbac") {
+          activateFilter("Miền Bắc", "btn-mienbac");
+        } else if (hash === "#mientrung") {
+          activateFilter("Miền Trung", "btn-mientrung");
+        } else if (hash === "#miennam") {
+          activateFilter("Miền Nam", "btn-miennam");
+        }
+      }
+      function activateFilter(regionName, buttonId) {
+        document
+          .querySelectorAll(".filter-btn")
+          .forEach((btn) => btn.classList.remove("active"));
+        const targetBtn = document.getElementById(buttonId);
+        if (targetBtn) targetBtn.classList.add("active");
+        currentFilter = regionName;
+        handleFilter();
+      }
+      window.addEventListener("DOMContentLoaded", checkHashAndFilter);
+      window.addEventListener("hashchange", checkHashAndFilter);
+    </script>
+  </body>
+</html>
